@@ -4,16 +4,27 @@
  */
 var fs = require('fs');
 function getWords(callback) {
+    fs.readFile("../assets/words.txt", "utf8", function (err, data) {
+        if (err) {
+            throw err;
+        }
+        var rtn = data.split("\n");
+        callback(rtn);
+    });
 }
 function get2grams(callback) {
     fs.readFile("../assets/w2_.txt", "utf8", function (err, data) {
+        if (err) {
+            throw err;
+        }
         var unsorted = {};
-        var data_split = data.split("\n");
-        for (var s in data_split) {
+        var data_split = data.split("\r\n");
+        for (var _i = 0, data_split_1 = data_split; _i < data_split_1.length; _i++) {
+            var s = data_split_1[_i];
             var a = s.split("\t");
-            var prev = a[0];
-            var word = a[1];
-            var freq = parseInt(a[2]);
+            var prev = a[1];
+            var word = a[2];
+            var freq = parseInt(a[0]);
             if (!unsorted[prev]) {
                 unsorted[prev] = [];
             }
@@ -25,12 +36,19 @@ function get2grams(callback) {
             unsorted[a].sort(function (a, b) {
                 return a.freq - b.freq;
             });
-            for (var _i = 0, _a = unsorted[a]; _i < _a.length; _i++) {
-                var b = _a[_i];
+            for (var _a = 0, _b = unsorted[a]; _a < _b.length; _a++) {
+                var b = _b[_a];
                 rtn[a].push(b.word);
             }
         }
         callback(rtn);
     });
 }
-get2grams(function (lib) { });
+var write = { words: null, twograms: null };
+getWords(function (words) {
+    write.words = words;
+    get2grams(function (twograms) {
+        write.twograms = twograms;
+        fs.writeFile("../build/library.json", JSON.stringify(write));
+    });
+});

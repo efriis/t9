@@ -4,7 +4,8 @@
   "description": "T9 Implementation for Meteor Team",
   "main": "js/index.js",
   "scripts": {
-    "test": "node js/tests/index.js"
+    "test": "node js/tests/index.js",
+    "build": "node js/build_json.js"
   },
   "author": "Erick Friis <efriis@mit.edu>",
   "license": "UNLICENSED"

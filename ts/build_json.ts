@@ -4,17 +4,26 @@
 import fs = require('fs');
 
 function getWords(callback:(lib:string[])=>void) {
-
+    fs.readFile("../assets/words.txt", "utf8", (err,data) => {
+        if(err) {
+            throw err;
+        }
+        let rtn:string[] = data.split("\n");
+        callback(rtn);
+    })
 }
 function get2grams(callback:(libsByWord:{[word:string]:string[]})=>void) {
-    fs.readFile("../assets/w2_.txt", "utf8", (err, data)=> {
+    fs.readFile("../assets/w2_.txt", "utf8", (err, data) => {
+        if(err) {
+            throw err;
+        }
         let unsorted:{[word:string]:{word:string,freq:number}[]} = {};
-        let data_split = data.split("\n");
-        for (let s in data_split) {
+        let data_split = data.split("\r\n");
+        for (let s of data_split) {
             let a = s.split("\t");
-            let prev = a[0];
-            let word = a[1];
-            let freq = parseInt(a[2]);
+            let prev = a[1];
+            let word = a[2];
+            let freq = parseInt(a[0]);
             if(!unsorted[prev]) {
                 unsorted[prev] = []
             }
@@ -35,4 +44,11 @@ function get2grams(callback:(libsByWord:{[word:string]:string[]})=>void) {
     });
 }
 
-get2grams((lib)=>{});
+let write = {words:null,twograms:null};
+getWords((words) => {
+    write.words = words;
+    get2grams((twograms) => {
+        write.twograms = twograms;
+        fs.writeFile("../build/library.json",JSON.stringify(write));
+    });
+});
