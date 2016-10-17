@@ -9,12 +9,12 @@ export class WordFinder {
     dialpad:{[letter:string]:string};
     suggestion_limit:Number;
     public constructor(callback:()=>void=()=>{}) {
-        fs.readFile('../config.json','utf8',(err,contents)=>{
+        fs.readFile(__dirname + '/../config.json','utf8',(err,contents)=>{
             let data = JSON.parse(contents);
             this.dialpad = data.dialpad;
             this.suggestion_limit = data.suggestion_limit;
         });
-        fs.readFile('../build/library.json','utf8',(err,contents)=>{
+        fs.readFile(__dirname + '/../build/library.json','utf8',(err,contents)=>{
             let data = JSON.parse(contents);
             this.twograms = data.twograms;
             this.words = data.words;
@@ -45,6 +45,13 @@ export class WordFinder {
 
         return rtn;
     }
+
+    /**
+     * Simple function to figure out if a number sequence matches a word
+     * @param sequence The number sequence that the user typed on the dialpad
+     * @param prospective_match The word to check
+     * @returns {boolean} Whether the prospective_match actually matches sequence or not
+     */
     private search_match(sequence:string,prospective_match:string) {
         if(sequence.length > prospective_match.length) return false;
         for(let i = 0; i < sequence.length; i++) {

@@ -7,12 +7,12 @@ var WordFinder = (function () {
     function WordFinder(callback) {
         var _this = this;
         if (callback === void 0) { callback = function () { }; }
-        fs.readFile('../config.json', 'utf8', function (err, contents) {
+        fs.readFile(__dirname + '/../config.json', 'utf8', function (err, contents) {
             var data = JSON.parse(contents);
             _this.dialpad = data.dialpad;
             _this.suggestion_limit = data.suggestion_limit;
         });
-        fs.readFile('../build/library.json', 'utf8', function (err, contents) {
+        fs.readFile(__dirname + '/../build/library.json', 'utf8', function (err, contents) {
             var data = JSON.parse(contents);
             _this.twograms = data.twograms;
             _this.words = data.words;
@@ -44,6 +44,12 @@ var WordFinder = (function () {
         }
         return rtn;
     };
+    /**
+     * Simple function to figure out if a number sequence matches a word
+     * @param sequence The number sequence that the user typed on the dialpad
+     * @param prospective_match The word to check
+     * @returns {boolean} Whether the prospective_match actually matches sequence or not
+     */
     WordFinder.prototype.search_match = function (sequence, prospective_match) {
         if (sequence.length > prospective_match.length)
             return false;

@@ -1,11 +1,12 @@
 # T9 Implementation
-For Meteor coding challenge
+For Meteor coding challenge. Written in TypeScript
 
-## Running
+## Usage
 To run the full application (with bigram predicitions based on context):
 ```js
 node js/index.js
 ```
+In this version, you can type numbers to add to the current word, letters to select a suggestion to add to your message, backspace to delete a number, or enter to select the first suggestion.
 
 To run the simple predictions in the console:
 ```js
@@ -13,7 +14,8 @@ node js/simple.js
 ```
 
 ## Configuration
-
+You can configure the program in `config.json`. Here, you can change the max number of suggestions it searches for and prints (by default, 10).
+You can also configure the dialpad mappings. In theory, you could even create a map including nearby characters on a keyboard to repurpose lib.ts as a version of autocorrect. However, this will not work with my main stdin program, since it uses letters to select what you would like to add to the message.
 
 ## Installation
 No installation is required

@@ -1,5 +1,5 @@
 {
-  "suggestion_limit":5,
+  "suggestion_limit":10,
   "dialpad":{
     "a":"2",
     "b":"2",
