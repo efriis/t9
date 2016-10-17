@@ -34,7 +34,7 @@ function get2grams(callback) {
         for (var a in unsorted) {
             rtn[a] = [];
             unsorted[a].sort(function (a, b) {
-                return a.freq - b.freq;
+                return b.freq - a.freq;
             });
             for (var _a = 0, _b = unsorted[a]; _a < _b.length; _a++) {
                 var b = _b[_a];

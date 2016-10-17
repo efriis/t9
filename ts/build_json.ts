@@ -34,7 +34,7 @@ function get2grams(callback:(libsByWord:{[word:string]:string[]})=>void) {
         for(let a in unsorted) {
             rtn[a] = [];
             unsorted[a].sort((a,b)=>{
-                return a.freq - b.freq;
+                return b.freq - a.freq;
             });
             for(let b of unsorted[a]) {
                 rtn[a].push(b.word);
