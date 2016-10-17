@@ -2,7 +2,7 @@
   "name": "t9",
   "version": "1.0.0",
   "description": "T9 Implementation for Meteor Team",
-  "main": "js/index.js",
+  "main": "js/lib.js",
   "scripts": {
     "build": "node js/build_json.js"
   },
