@@ -4,7 +4,7 @@
 import fs = require('fs');
 
 function getWords(callback:(lib:string[])=>void) {
-    fs.readFile("../assets/words.txt", "utf8", (err,data) => {
+    fs.readFile(__dirname+"/../assets/words.txt", "utf8", (err,data) => {
         if(err) {
             throw err;
         }
@@ -13,7 +13,7 @@ function getWords(callback:(lib:string[])=>void) {
     })
 }
 function get2grams(callback:(libsByWord:{[word:string]:string[]})=>void) {
-    fs.readFile("../assets/w2_.txt", "utf8", (err, data) => {
+    fs.readFile(__dirname+"/../assets/w2_.txt", "utf8", (err, data) => {
         if(err) {
             throw err;
         }
