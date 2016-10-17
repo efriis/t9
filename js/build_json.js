@@ -4,7 +4,7 @@
  */
 var fs = require('fs');
 function getWords(callback) {
-    fs.readFile("../assets/words.txt", "utf8", function (err, data) {
+    fs.readFile(__dirname + "/../assets/words.txt", "utf8", function (err, data) {
         if (err) {
             throw err;
         }
@@ -13,7 +13,7 @@ function getWords(callback) {
     });
 }
 function get2grams(callback) {
-    fs.readFile("../assets/w2_.txt", "utf8", function (err, data) {
+    fs.readFile(__dirname + "/../assets/w2_.txt", "utf8", function (err, data) {
         if (err) {
             throw err;
         }
