@@ -49,6 +49,6 @@ getWords((words) => {
     write.words = words;
     get2grams((twograms) => {
         write.twograms = twograms;
-        fs.writeFile("../build/library.json",JSON.stringify(write));
+        fs.writeFile(__dirname+"/../build/library.json",JSON.stringify(write));
     });
 });
